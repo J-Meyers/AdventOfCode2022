@@ -1,5 +1,5 @@
 [package]
-name = "AdventOfCodeDay01a"
+name = "advent_of_code_day01a"
 version = "0.1.0"
 edition = "2021"
 

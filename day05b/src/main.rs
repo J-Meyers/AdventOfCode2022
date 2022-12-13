@@ -20,7 +20,7 @@ impl CargoMover {
             skip: true,
         }
     }
-    
+
     // Main function
     fn compute_end_boxes(&mut self, filename: String) -> String {
         if let Ok(lines) = read_lines(filename) {
@@ -68,7 +68,7 @@ impl CargoMover {
             }
         }
     }
-    
+
     fn parse_commands(&mut self, line_s: String) {
         if self.skip {
             self.skip = false;
@@ -83,12 +83,17 @@ impl CargoMover {
     }
 
     fn move_boxes(&mut self, num_boxes_to_move: usize, src_box: usize, dst_box: usize) {
+        let mut temp_vec: VecDeque<char> = VecDeque::new();
+        temp_vec.reserve(num_boxes_to_move);
         for _ in 0..num_boxes_to_move {
             let letter = self.boxes[src_box - 1].pop_front().unwrap();
+            temp_vec.push_front(letter);
+        }
+        for letter in temp_vec {
             self.boxes[dst_box - 1].push_front(letter);
         }
     }
-    
+
     fn compute_result(&self) -> String {
         let mut res = String::new();
         // Result is the top letter of each box
